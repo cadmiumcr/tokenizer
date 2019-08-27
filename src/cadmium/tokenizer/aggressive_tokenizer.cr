@@ -1,8 +1,8 @@
 require "./tokenizer"
-require "cadmium_utils"
 
 module Cadmium
   class AggressiveTokenizer < Tokenizer
+    include Util
     @lang : Symbol
 
     def initialize(*, lang = nil)
@@ -35,7 +35,7 @@ module Cadmium
         string = string.gsub(/[^a-zа-яё0-9]/i, ' ').gsub(/[\s\n]+/, ' ').strip
         string.split(' ').reject(&.empty?)
       when :sv
-        string = Utils.remove_diacritics(string)
+        string = remove_diacritics(string)
         trim(string.split(/[^A-Za-z0-9_åÅäÄöÖüÜ]+/))
       else
         trim(string.split(/\W+/))

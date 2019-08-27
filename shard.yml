@@ -5,8 +5,8 @@ authors:
   - Chris Watson <cawatson1993@gmail.com>
 
 dependencies:
-  cadmium:
-    github: cadmiumcr/cadmium
+  cadmium_util:
+    github: cadmiumcr/utilities
 
 crystal: 0.30.1
 
