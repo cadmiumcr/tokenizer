@@ -9,7 +9,7 @@ This module contains several string tokenizers. Each one has its use cases and s
    ```yaml
    dependencies:
      cadmium_tokenizer:
-       github: cadmiumcr/cadmium_tokenizer
+       github: cadmiumcr/tokenizer
    ```
 
 2. Run `shards install`

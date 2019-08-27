@@ -1,10 +1,8 @@
-require "cadmium_i18n/stopwords"
-
 module Cadmium
   class PragmaticTokenizer < Tokenizer
     module Languages
       class Common
-        include Cadmium::I18n::StopWords
+        include Cadmium::Util::StopWords
         # Single quotes handling
         ALNUM_QUOTE     = /(\w|\D)'(?!')(?=\W|$)/
         QUOTE_WORD      = /(\W|^)'(?=\w)/

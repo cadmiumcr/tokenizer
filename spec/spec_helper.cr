@@ -1,2 +1,2 @@
 require "spec"
-require "../src/cadmium"
+require "../src/cadmium_tokenizer"

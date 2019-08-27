@@ -1,7 +1,8 @@
-require "cadmium"
+require "cadmium_util"
 require "./cadmium/tokenizer"
 
 module Cadmium
+  include Util
   method_generator({
     aggressive_tokenizer:       Cadmium::AggressiveTokenizer,
     case_tokenizer:             Cadmium::CaseTokenizer,
@@ -11,6 +12,6 @@ module Cadmium
     treebank_word_tokenizer:    Cadmium::TreebankWordTokenizer,
     whitespace_tokenizer:       Cadmium::WhitespaceTokenizer,
     word_punctuation_tokenizer: Cadmium::WordPunctuationTokenizer,
-    word_tokenizer:             Cadmium::WordTokenizer
+    word_tokenizer:             Cadmium::WordTokenizer,
   })
 end
