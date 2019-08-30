@@ -28,7 +28,7 @@ describe Cadmium::AggressiveTokenizer do
       subject.tokenize("i shal... pause").should eq(["i", "shal", "pause"])
     end
 
-    it "should return emty string when fed with empty string" do
+    it "should return empty string when fed with empty string" do
       subject.tokenize("").should eq([""])
     end
   end
