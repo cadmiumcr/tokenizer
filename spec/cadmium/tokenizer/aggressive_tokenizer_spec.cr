@@ -29,7 +29,7 @@ describe Cadmium::AggressiveTokenizer do
     end
 
     it "should return an empty Array(String) when fed with empty string" do
-      subject.tokenize("").should eq(Array(String).new)
+      subject.tokenize("").should eq([] of String)
     end
   end
 
