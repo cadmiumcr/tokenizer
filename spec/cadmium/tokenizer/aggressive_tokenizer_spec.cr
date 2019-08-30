@@ -27,6 +27,10 @@ describe Cadmium::AggressiveTokenizer do
     it "should swollow duplicate punctuation" do
       subject.tokenize("i shal... pause").should eq(["i", "shal", "pause"])
     end
+
+    it "should return an empty Array(String) when fed with empty string" do
+      subject.tokenize("").should eq([] of String)
+    end
   end
 
   describe ":es" do
