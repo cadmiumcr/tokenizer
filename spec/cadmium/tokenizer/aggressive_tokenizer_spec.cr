@@ -28,8 +28,8 @@ describe Cadmium::AggressiveTokenizer do
       subject.tokenize("i shal... pause").should eq(["i", "shal", "pause"])
     end
 
-    it "should return emty string when fed with empty string" do
-      subject.tokenize("").should eq([""])
+    it "should return an empty Array(String) when fed with empty string" do
+      subject.tokenize("").should eq(Array(String).new)
     end
   end
 
