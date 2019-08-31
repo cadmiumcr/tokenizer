@@ -1,4 +1,4 @@
-require "./regex_tokenizer"
+require "./regex"
 
 module Cadmium
   class Word < Regex
