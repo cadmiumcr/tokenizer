@@ -68,7 +68,7 @@ module Cadmium
   # tokenizer.tokenize("This sentence has a long string of dots .......................")
   # # => ["this", "sentence", "has", "a", "long", "string", "of", "dots"]
   # ```
-  class PragmaticTokenizer < Tokenizer
+  class Pragmatic < Tokenizer
     enum PunctuationOptions
       ALL
       SEMI
@@ -207,19 +207,19 @@ module Cadmium
 
     def tokenize(string : String) : Array(String)
       HTML.unescape(string)
-        .scan(PragmaticTokenizer::Regex::CHUNK_LONG_INPUT_TEXT)
+        .scan(Pragmatic::Regex::CHUNK_LONG_INPUT_TEXT)
         .flat_map { |segment| process_segment(segment.string) }
     end
 
     private def process_segment(segment)
       pre_processed = pre_process(segment)
       cased_segment = chosen_case(pre_processed)
-      @tokens = PragmaticTokenizer::PostProcessor.new(text: cased_segment, abbreviations: @abbreviations, downcase: @downcase).process
+      @tokens = Pragmatic::PostProcessor.new(text: cased_segment, abbreviations: @abbreviations, downcase: @downcase).process
       post_process_tokens
     end
 
     private def pre_process(segment)
-      pre_processor = PragmaticTokenizer::PreProcessor.new(@language_module)
+      pre_processor = Pragmatic::PreProcessor.new(@language_module)
       pre_processor.process(segment)
     end
 
@@ -243,7 +243,7 @@ module Cadmium
     end
 
     private def expand_token_contraction(token)
-      normalized = inverse_case(token.gsub(PragmaticTokenizer::Regex::CONTRACTIONS, SINGLE_QUOTE))
+      normalized = inverse_case(token.gsub(Pragmatic::Regex::CONTRACTIONS, SINGLE_QUOTE))
       return token unless @contractions.has_key?(normalized)
       result = @contractions[normalized].split(SPACE)
       result[0] = result[0].capitalize unless @downcase
@@ -258,25 +258,25 @@ module Cadmium
     end
 
     private def split_underscores_asterisk(token)
-      return token if token =~ PragmaticTokenizer::Regex::ONLY_HASHTAG_MENTION
-      token.split(PragmaticTokenizer::Regex::UNDERSCORES_ASTERISK)
+      return token if token =~ Pragmatic::Regex::ONLY_HASHTAG_MENTION
+      token.split(Pragmatic::Regex::UNDERSCORES_ASTERISK)
     end
 
     private def remove_irrelevant_characters(token)
-      token = token.gsub(PragmaticTokenizer::Regex::IRRELEVANT_CHARACTERS, NOTHING)
-      return token if token =~ PragmaticTokenizer::Regex::ONLY_HASHTAG_MENTION
-      token = token.gsub(PragmaticTokenizer::Regex::ENDS_WITH_EXCITED_ONE, NOTHING)
+      token = token.gsub(Pragmatic::Regex::IRRELEVANT_CHARACTERS, NOTHING)
+      return token if token =~ Pragmatic::Regex::ONLY_HASHTAG_MENTION
+      token = token.gsub(Pragmatic::Regex::ENDS_WITH_EXCITED_ONE, NOTHING)
       token
     end
 
     private def many_dots?(token)
-      token =~ PragmaticTokenizer::Regex::MANY_PERIODS
+      token =~ Pragmatic::Regex::MANY_PERIODS
     end
 
     private def classic_filter!
       @tokens.map! do |token|
         token = token.delete(DOT) if @abbreviations.includes?(token.chomp(DOT))
-        token = token.sub(PragmaticTokenizer::Regex::ENDS_WITH_APOSTROPHE_AND_S, NOTHING)
+        token = token.sub(Pragmatic::Regex::ENDS_WITH_APOSTROPHE_AND_S, NOTHING)
         token
       end
     end
@@ -284,11 +284,11 @@ module Cadmium
     private def process_numbers!
       case @numbers
       when NumbersOptions::SEMI
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::ONLY_DECIMALS }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::ONLY_DECIMALS }
       when NumbersOptions::NONE
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::NO_DECIMALS_NO_NUMERALS }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::NO_DECIMALS_NO_NUMERALS }
       when NumbersOptions::ONLY
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::NO_DECIMALS }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::NO_DECIMALS }
       end
     end
 
@@ -299,11 +299,11 @@ module Cadmium
     private def process_punctuation!
       case @punctuation
       when PunctuationOptions::SEMI
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::PUNCTUATION4 }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::PUNCTUATION4 }
       when PunctuationOptions::NONE
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::ONLY_PUNCTUATION }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::ONLY_PUNCTUATION }
       when PunctuationOptions::ONLY
-        @tokens.keep_if { |token| token =~ PragmaticTokenizer::Regex::ONLY_PUNCTUATION }
+        @tokens.keep_if { |token| token =~ Pragmatic::Regex::ONLY_PUNCTUATION }
       end
     end
 
@@ -314,18 +314,18 @@ module Cadmium
     private def mentions!
       case @mentions
       when MentionsOptions::REMOVE
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::ONLY_MENTION }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::ONLY_MENTION }
       when MentionsOptions::KEEP_AND_CLEAN
-        @tokens.map! { |token| token =~ PragmaticTokenizer::Regex::ONLY_MENTION ? token[1..-1] : token }
+        @tokens.map! { |token| token =~ Pragmatic::Regex::ONLY_MENTION ? token[1..-1] : token }
       end
     end
 
     private def hashtags!
       case @hashtags
       when MentionsOptions::REMOVE
-        @tokens.delete_if { |token| token =~ PragmaticTokenizer::Regex::ONLY_HASHTAG }
+        @tokens.delete_if { |token| token =~ Pragmatic::Regex::ONLY_HASHTAG }
       when MentionsOptions::KEEP_AND_CLEAN
-        @tokens.map! { |token| token =~ PragmaticTokenizer::Regex::ONLY_HASHTAG ? token[1..-1] : token }
+        @tokens.map! { |token| token =~ Pragmatic::Regex::ONLY_HASHTAG ? token[1..-1] : token }
       end
     end
 
@@ -336,10 +336,10 @@ module Cadmium
     private def regex_by_options
       @regex_by_options ||= begin
         regex_array = [] of ::Regex
-        regex_array << PragmaticTokenizer::Regex::RANGE_UNUSUAL_AND_EMOJI if @remove_emoji
-        regex_array << PragmaticTokenizer::Regex::ONLY_EMAIL if @remove_emails
-        regex_array << PragmaticTokenizer::Regex::STARTS_WITH_HTTP if @remove_urls
-        regex_array << PragmaticTokenizer::Regex::ONLY_DOMAIN2 if @remove_domains
+        regex_array << Pragmatic::Regex::RANGE_UNUSUAL_AND_EMOJI if @remove_emoji
+        regex_array << Pragmatic::Regex::ONLY_EMAIL if @remove_emails
+        regex_array << Pragmatic::Regex::STARTS_WITH_HTTP if @remove_urls
+        regex_array << Pragmatic::Regex::ONLY_DOMAIN2 if @remove_domains
         ::Regex.union(regex_array) unless regex_array.empty?
       end
     end
@@ -351,9 +351,9 @@ module Cadmium
     private def split_long_word(token)
       return token unless @long_word_split && @long_word_split != 0
       return token if token.size <= @long_word_split
-      return token if token =~ PragmaticTokenizer::Regex::ONLY_HASHTAG_MENTION
-      return token if token =~ PragmaticTokenizer::Regex::DOMAIN_OR_EMAIL
-      token.split(PragmaticTokenizer::Regex::HYPHEN_OR_UNDERSCORE)
+      return token if token =~ Pragmatic::Regex::ONLY_HASHTAG_MENTION
+      return token if token =~ Pragmatic::Regex::DOMAIN_OR_EMAIL
+      token.split(Pragmatic::Regex::HYPHEN_OR_UNDERSCORE)
     end
 
     private def chosen_case(text)

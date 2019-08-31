@@ -1,7 +1,7 @@
 require "./tokenizer"
 
 module Cadmium
-  class RegexTokenizer < Tokenizer
+  class Regex < Tokenizer
     @pattern : Regex
     @gaps : Bool
     @discard_empty : Bool

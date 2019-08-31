@@ -1,7 +1,7 @@
 require "./regex_tokenizer"
 
 module Cadmium
-  class WhitespaceTokenizer < RegexTokenizer
+  class Whitespace < Regex
     REGEX_PATTERN = /\s+/
 
     def initialize

@@ -1,5 +1,5 @@
 module Cadmium
-  class PragmaticTokenizer < Tokenizer
+  class Pragmatic < Tokenizer
     # :nodoc:
     class Regex
       # Things that can or should be done:

@@ -4,7 +4,7 @@ module Cadmium
   # The Treebank tokenizer uses regular expressions to tokenize text as in Penn Treebank.
   # This implementation is a port of the tokenizer sed script written by Robert McIntyre
   # and available at http://www.cis.upenn.edu/~treebank/tokenizer.sed.
-  class TreebankWordTokenizer < Tokenizer
+  class TreebankWord < Tokenizer
     CONTRACTIONS_2 = [
       /(.)('ll|'re|'ve|n't|'s|'m|'d)\b/i,
       /\b(can)(not)\b/i,

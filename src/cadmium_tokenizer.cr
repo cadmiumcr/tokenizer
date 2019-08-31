@@ -4,14 +4,14 @@ require "./cadmium/tokenizer"
 module Cadmium
   include Util
   method_generator({
-    aggressive_tokenizer:       Cadmium::AggressiveTokenizer,
-    case_tokenizer:             Cadmium::CaseTokenizer,
-    pragmatic_tokenizer:        Cadmium::PragmaticTokenizer,
-    regex_tokenizer:            Cadmium::RegexTokenizer,
-    sentence_tokenizer:         Cadmium::SentenceTokenizer,
-    treebank_word_tokenizer:    Cadmium::TreebankWordTokenizer,
-    whitespace_tokenizer:       Cadmium::WhitespaceTokenizer,
-    word_punctuation_tokenizer: Cadmium::WordPunctuationTokenizer,
-    word_tokenizer:             Cadmium::WordTokenizer,
+    aggressive_tokenizer:       Cadmium::Agressive,
+    case_tokenizer:             Cadmium::Case,
+    pragmatic_tokenizer:        Cadmium::Pragmatic,
+    regex_tokenizer:            Cadmium::Regex,
+    sentence_tokenizer:         Cadmium::Sentence,
+    treebank_word_tokenizer:    Cadmium::TreebankWord,
+    whitespace_tokenizer:       Cadmium::Whitespace,
+    word_punctuation_tokenizer: Cadmium::WordPunctuation,
+    word_tokenizer:             Cadmium::Word,
   })
 end

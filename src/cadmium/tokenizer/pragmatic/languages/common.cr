@@ -1,5 +1,5 @@
 module Cadmium
-  class PragmaticTokenizer < Tokenizer
+  class Pragmatic < Tokenizer
     module Languages
       class Common
         include Cadmium::Util::StopWords
