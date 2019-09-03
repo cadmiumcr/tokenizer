@@ -2,7 +2,7 @@ require "./tokenizer/*"
 
 module Cadmium
   module StringExtension
-    def tokenize(tokenizer = Cadmium::WordPunctuation, *args, **kwargs)
+    def tokenize(tokenizer = Cadmium::Tokenizer::WordPunctuation, *args, **kwargs)
       tokenizer = tokenizer.new(*args, **kwargs)
       tokenizer.tokenize(self)
     end

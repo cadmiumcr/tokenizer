@@ -1,14 +1,16 @@
 require "./common"
 
 module Cadmium
-  class Pragmatic < Tokenizer
-    module Languages
-      class Portuguese < Languages::Common
-        include Cadmium::Util::StopWords
-        stop_words pt
-        ABBREVIATIONS = Set(String).new
-        STOP_WORDS    = stop_words_pt
-        CONTRACTIONS  = {} of String => String
+  module Tokenizer
+    class Pragmatic < Base
+      module Languages
+        class Portuguese < Languages::Common
+          include Cadmium::Util::StopWords
+          stop_words pt
+          ABBREVIATIONS = Set(String).new
+          STOP_WORDS    = stop_words_pt
+          CONTRACTIONS  = {} of String => String
+        end
       end
     end
   end
