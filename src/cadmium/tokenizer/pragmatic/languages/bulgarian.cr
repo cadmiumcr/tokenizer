@@ -1,7 +1,7 @@
 require "./common"
 
 module Cadmium
-  class PragmaticTokenizer < Tokenizer
+  class Pragmatic < Tokenizer
     module Languages
       class Bulgarian < Languages::Common
         include Cadmium::Util::StopWords

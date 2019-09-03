@@ -1,7 +1,7 @@
 require "./regex"
 
 module Cadmium
-  class PragmaticTokenizer < Tokenizer
+  class Pragmatic < Tokenizer
     # :nodoc:
     class PreProcessor
       @replacements_for_quotes : Hash(String, String)?
@@ -70,7 +70,7 @@ module Cadmium
       end
 
       def replacement_for_key(replacement_key)
-        PragmaticTokenizer::Languages::Common::PUNCTUATION_MAP[replacement_key]
+        Pragmatic::Languages::Common::PUNCTUATION_MAP[replacement_key]
       end
     end
   end

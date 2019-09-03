@@ -1,5 +1,5 @@
 module Cadmium
-  class VisibleCharTokenizer < RegexTokenizer
+  class VisibleChar < Regex
     REGEX_PATTERN = /\s+|(?<=[\P{Cc}])(?=[\P{Cc}])/
 
     def initialize

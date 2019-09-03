@@ -1,7 +1,7 @@
 require "./tokenizer"
 
 module Cadmium
-  class CaseTokenizer < Tokenizer
+  class Case < Tokenizer
     @preserve_apostrophe : Bool
 
     def initialize(@preserve_apostrophe = false)

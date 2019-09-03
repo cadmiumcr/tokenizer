@@ -1,7 +1,7 @@
-require "./regex_tokenizer"
+require "./regex"
 
 module Cadmium
-  class WordTokenizer < RegexTokenizer
+  class Word < Regex
     REGEX_PATTERN = /[^A-Za-zА-Яа-я0-9_]+/
 
     def initialize
