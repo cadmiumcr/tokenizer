@@ -4,7 +4,7 @@ require "./cadmium/tokenizer"
 module Cadmium
   include Util
   method_generator({
-    aggressive_tokenizer:       Cadmium::Tokenizer::Agressive,
+    aggressive_tokenizer:       Cadmium::Tokenizer::Aggressive,
     case_tokenizer:             Cadmium::Tokenizer::Case,
     pragmatic_tokenizer:        Cadmium::Tokenizer::Pragmatic,
     regex_tokenizer:            Cadmium::Tokenizer::Regex,
