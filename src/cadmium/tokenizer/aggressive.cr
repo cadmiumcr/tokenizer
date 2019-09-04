@@ -2,7 +2,7 @@ require "./tokenizer"
 
 module Cadmium
   module Tokenizer
-    class Agressive < Base
+    class Aggressive < Base
       include Util
       @lang : Symbol
 

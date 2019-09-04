@@ -3,11 +3,11 @@ require "./tokenizer"
 module Cadmium
   module Tokenizer
     class Regex < Base
-      @pattern : Regex
+      @pattern : ::Regex
       @gaps : Bool
       @discard_empty : Bool
 
-      def initialize(pattern : Regex, *, gaps = nil, discard_empty = nil)
+      def initialize(pattern : ::Regex, *, gaps = nil, discard_empty = nil)
         @pattern = pattern
         @gaps = gaps.nil? ? true : gaps
         @discard_empty = discard_empty.nil? ? true : discard_empty
