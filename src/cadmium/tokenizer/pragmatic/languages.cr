@@ -6,6 +6,7 @@ require "./languages/bulgarian"
 require "./languages/deutsch"
 require "./languages/spanish"
 require "./languages/portuguese"
+require "./languages/french"
 
 module Cadmium
   module Tokenizer
@@ -23,7 +24,7 @@ module Cadmium
           es: Spanish,
           # fa: Persian,
           # fi: Finnish,
-          # fr: French,
+          fr: French,
           # id: Indonesian,
           # it: Italian,
           # lv: Latvian,
