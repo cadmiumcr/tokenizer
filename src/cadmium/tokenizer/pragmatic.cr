@@ -114,7 +114,7 @@ module Cadmium
 
       # Other languages to include in the filtering of abbreviations,
       # contractions, and stop words
-      property filter_languages : Array(String | Symbol)
+      property filter_languages : Array(Symbol)
 
       # What to do with hashtags (`#awesome`)
       property hashtags : MentionsOptions
@@ -168,7 +168,7 @@ module Cadmium
         abbreviations = Set(String).new,
         stop_words = Set(String).new,
         contractions = {} of String => String,
-        filter_languages = [] of String | Symbol,
+        filter_languages = [] of Symbol,
         @hashtags : MentionsOptions = :keep_original,
         @mentions : MentionsOptions = :keep_original,
         @punctuation : PunctuationOptions = :all,
@@ -191,18 +191,19 @@ module Cadmium
         @stop_words = stop_words.is_a?(Set) ? stop_words : Set(String).new(stop_words)
         @contractions = contractions.is_a?(Hash) ? contractions : contractions.to_h
 
-        @filter_languages = filter_languages.is_a?(Array(String | Symbol)) ? filter_languages : (Array(String | Symbol).new.concat(filter_languages))
+        @filter_languages = filter_languages.is_a?(Array(Symbol)) ? filter_languages : (Array(Symbol).new.concat(filter_languages))
 
         @contractions.merge!(@language_module.contractions)
         @abbreviations.concat @language_module.abbreviations if @abbreviations.empty?
-        @stop_words.concat @language_module.stop_words if @stop_words.empty?
+        add_stopwords_list(language)
+        @stop_words.concat @@loaded_stop_words[language] if @stop_words.empty?
 
-        # ameba:disable Lint/ShadowingOuterLocalVar
-        @filter_languages.each do |language|
-          language = Languages.get_language_by_code(language)
-          @contractions.merge!(language.contractions)
-          @abbreviations.concat language.abbreviations
-          @stop_words.concat language.stop_words
+        @filter_languages.each do |language_code|
+          add_stopwords_list(language_code)
+          @stop_words.concat @@loaded_stop_words[language_code]
+          language_name = Languages.get_language_by_code(language_code)
+          @contractions.merge!(language_name.contractions)
+          @abbreviations.concat language_name.abbreviations
         end
       end
 
