@@ -3,17 +3,18 @@ module Cadmium
     class Pragmatic < Base
       module Languages
         class Common
-          include Cadmium::Util::StopWords
           # Single quotes handling
           ALNUM_QUOTE     = /(\w|\D)'(?!')(?=\W|$)/
           QUOTE_WORD      = /(\W|^)'(?=\w)/
           QUOTE_NOT_TWAS1 = /(\W|^)'(?!twas)/i
           QUOTE_NOT_TWAS2 = /(\W|^)‘(?!twas)/i
-
           PUNCTUATION_MAP = {"。" => "♳", "．" => "♴", "." => "♵", "！" => "♶", "!" => "♷", "?" => "♸", "？" => "♹", "、" => "♺", "¡" => "⚀", "¿" => "⚁", "„" => "⚂", "“" => "⚃", "[" => "⚄", "]" => "⚅", "\"" => "☇", "#" => "☈", "$" => "☉", "%" => "☊", "&" => "☋", "(" => "☌", ")" => "☍", "*" => "☠", "+" => "☢", "," => "☣", ":" => "☤", ";" => "☥", "<" => "☦", "=" => "☧", ">" => "☀", "@" => "☁", "^" => "☂", "_" => "☃", "`" => "☄", "'" => "☮", "{" => "♔", "|" => "♕", "}" => "♖", "~" => "♗", "-" => "♘", "«" => "♙", "»" => "♚", "”" => "⚘", "‘" => "⚭"}
           ABBREVIATIONS   = Set(String).new
-          STOP_WORDS      = @@stop_words
           CONTRACTIONS    = {} of String => String
+
+          def initialize
+            @@stop_words.add_list
+          end
 
           def self.punctuation_map
             PUNCTUATION_MAP
@@ -25,10 +26,6 @@ module Cadmium
 
           def self.abbreviations
             ABBREVIATIONS
-          end
-
-          def self.stop_words
-            STOP_WORDS
           end
 
           # This 'special treatment' is actually relevant for many other tests. Alter core regular expressions!

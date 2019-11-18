@@ -3,7 +3,6 @@ require "./tokenizer"
 module Cadmium
   module Tokenizer
     class Aggressive < Base
-      include Util
       @lang : Symbol
 
       def initialize(*, lang = nil)

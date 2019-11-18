@@ -1,5 +1,4 @@
 require "./languages/common"
-
 require "./languages/english"
 require "./languages/czech"
 require "./languages/bulgarian"

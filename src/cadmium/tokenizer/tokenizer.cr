@@ -1,6 +1,12 @@
+require "./stop_words"
+require "./diacritics"
+
 module Cadmium
   module Tokenizer
     abstract class Base
+      include StopWords
+      include Diacritics
+
       abstract def tokenize(string : String) : Array(String)
 
       def trim(arr)
