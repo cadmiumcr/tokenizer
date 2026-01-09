@@ -96,7 +96,7 @@ describe Cadmium::Tokenizer::Case do
 
   describe "italian" do
     it "should tokenize strings" do
-      subject.tokenize("Mi piacerebbe visitare l\'Italia un giorno di questi!").should eq(["Mi", "piacerebbe", "visitare", "l", "Italia", "un", "giorno", "di", "questi"])
+      subject.tokenize("Mi piacerebbe visitare l'Italia un giorno di questi!").should eq(["Mi", "piacerebbe", "visitare", "l", "Italia", "un", "giorno", "di", "questi"])
     end
   end
 

@@ -733,15 +733,15 @@ describe Cadmium::Tokenizer::Pragmatic do
             well-versed in patent law and the concerns of research-based industries
             would have ruled otherwise. And Judge Newman, a former patent lawyer,
             wrote in her dissent when the court denied a motion for a rehearing of
-            the case by the full court, \'The panel's judicial legislation has
+            the case by the full court, 'The panel's judicial legislation has
             affected an important high-technological industry, without regard
-            to the consequences for research and innovation or the public interest.\'
-            Says Ms. Raines, \'[The judgement] confirms our concern that the absence of
-            patent lawyers on the court could prove troublesome.\'"
+            to the consequences for research and innovation or the public interest.'
+            Says Ms. Raines, '[The judgement] confirms our concern that the absence of
+            patent lawyers on the court could prove troublesome.'"
           pt = Cadmium::Tokenizer::Pragmatic.new(
             language: :en
           )
-          pt.tokenize(text).should eq(["lisa", "raines", ",", "a", "lawyer", "and", "director", "of", "government", "relations", "for", "the", "industrial", "biotechnical", "association", ",", "contends", "that", "a", "judge", "well-versed", "in", "patent", "law", "and", "the", "concerns", "of", "research-based", "industries", "would", "have", "ruled", "otherwise", ".", "and", "judge", "newman", ",", "a", "former", "patent", "lawyer", ",", "wrote", "in", "her", "dissent", "when", "the", "court", "denied", "a", "motion", "for", "a", "rehearing", "of", "the", "case", "by", "the", "full", "court", ",", "\'", "the", "panel's", "judicial", "legislation", "has", "affected", "an", "important", "high-technological", "industry", ",", "without", "regard", "to", "the", "consequences", "for", "research", "and", "innovation", "or", "the", "public", "interest", ".", "\'", "says", "ms.", "raines", ",", "\'", "[", "the", "judgement", "]", "confirms", "our", "concern", "that", "the", "absence", "of", "patent", "lawyers", "on", "the", "court", "could", "prove", "troublesome", ".", "\'"])
+          pt.tokenize(text).should eq(["lisa", "raines", ",", "a", "lawyer", "and", "director", "of", "government", "relations", "for", "the", "industrial", "biotechnical", "association", ",", "contends", "that", "a", "judge", "well-versed", "in", "patent", "law", "and", "the", "concerns", "of", "research-based", "industries", "would", "have", "ruled", "otherwise", ".", "and", "judge", "newman", ",", "a", "former", "patent", "lawyer", ",", "wrote", "in", "her", "dissent", "when", "the", "court", "denied", "a", "motion", "for", "a", "rehearing", "of", "the", "case", "by", "the", "full", "court", ",", "'", "the", "panel's", "judicial", "legislation", "has", "affected", "an", "important", "high-technological", "industry", ",", "without", "regard", "to", "the", "consequences", "for", "research", "and", "innovation", "or", "the", "public", "interest", ".", "'", "says", "ms.", "raines", ",", "'", "[", "the", "judgement", "]", "confirms", "our", "concern", "that", "the", "absence", "of", "patent", "lawyers", "on", "the", "court", "could", "prove", "troublesome", ".", "'"])
         end
       end
       context "option (numbers)" do
@@ -1054,11 +1054,11 @@ describe Cadmium::Tokenizer::Pragmatic do
         end
 
         pending "identifies old school emoticons" do
-          text = "looking forward to the new kodak super8 camera \o/"
+          text = "looking forward to the new kodak super8 camera o/"
           pt = Cadmium::Tokenizer::Pragmatic.new(
             punctuation: :none
           )
-          pt.tokenize(text).should eq(["looking", "forward", "to", "the", "new", "kodak", "super8", "camera", "\o/"])
+          pt.tokenize(text).should eq(["looking", "forward", "to", "the", "new", "kodak", "super8", "camera", "o/"])
         end
 
         it "splits at hashtags" do

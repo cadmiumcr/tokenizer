@@ -183,7 +183,7 @@ module Cadmium
         @classic_filter = false,
         @downcase = true,
         @minimum_length = 0,
-        @long_word_split = 0
+        @long_word_split = 0,
       )
         @language_module = Languages.get_language_by_code(language)
 
